@@ -9,6 +9,7 @@ public class Habitacion {
 	List<Luz> luces;
 	
 	public Habitacion(String nombre) {
+		this.nombre = nombre;
 		luces = new ArrayList<>();
 	}
 	
