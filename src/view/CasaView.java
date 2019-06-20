@@ -19,6 +19,7 @@ import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 
 import controller.CasaController;
+import models.Habitacion;
 
 public class CasaView extends JFrame implements InterfazVista {
 	
@@ -83,15 +84,6 @@ public class CasaView extends JFrame implements InterfazVista {
 		removerHabitacion.addActionListener(c);
 		prueba.addActionListener(c);
 	}
-
-	public void setLista(JPanel panel) {
-		System.out.println("Tamaño: " + panel.getComponentCount());
-		panelPrincipal.remove(panelBotones);
-		
-		this.panelBotones = panel;
-		panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
-		this.pack();
-	}
 		
 	public void mostrar() {
 		this.pack();
@@ -112,5 +104,26 @@ public class CasaView extends JFrame implements InterfazVista {
 			    JOptionPane.WARNING_MESSAGE);
 	}
 	
+	public void mostrarListaDeHabitaciones(List<Habitacion> habitaciones, CasaController controller) {
+		int i;
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(habitaciones.size(),1));
+		for (i=0; i < habitaciones.size(); i++) {
+			Habitacion hab = habitaciones.get(i);
+			JButton button = new JButton(hab.getNombre());
+			button.addActionListener(controller);
+			button.setActionCommand(NUEVAVENTANA);
+			panel.add(button);
+		}
+		this.setLista(panel);
+	}
+	
+	public void setLista(JPanel panel) {
+		panelPrincipal.remove(panelBotones);
+		
+		this.panelBotones = panel;
+		panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
+		this.pack();
+	}
 	
 }

@@ -35,14 +35,14 @@ public class CasaController implements ActionListener {
 		if (evento.getActionCommand().equals(casaView.AGREGAR)) {
 			System.out.println(casaView.AGREGAR);
 			modelCasa.agregarHabitación(nombre);
-			casaView.setLista(convertirListaHabitacionesABotones(modelCasa.getHabitaciones()));
+			casaView.mostrarListaDeHabitaciones(modelCasa.getHabitaciones(), this);
 			
 			casaView.actualizar();
 		} else if (evento.getActionCommand().equals(casaView.REMOVER)) {
 			System.out.println(casaView.REMOVER);
 
 			modelCasa.removerHabitacion(nombre);
-			casaView.setLista(convertirListaHabitacionesABotones(modelCasa.getHabitaciones()));
+			casaView.mostrarListaDeHabitaciones(modelCasa.getHabitaciones(), this);
 			
 			casaView.actualizar();
 		} else if (evento.getActionCommand().equals(casaView.NUEVAVENTANA)) {
