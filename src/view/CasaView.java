@@ -1,27 +1,49 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
 
 import controller.CasaController;
-import models.Habitacion;
 
 public class CasaView extends JFrame implements InterfazVista {
+	
+	private static final CasaView instance = new CasaView();
+	
+	public static CasaView getInstance(){
+        return instance;
+    }
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	JTextField nuevaHabitacion;
 	JButton agregarHabitacion;
 	JButton removerHabitacion;
-	JList listaHabitaciones;
+	JButton prueba;
+	JPanel panelBotones = new JPanel();
+
+	JList<JButton> listaHabitaciones;
 	JPanel panelPrincipal = new JPanel();
+
 	
-	public CasaView() {
+	private CasaView() {
 		super("Bienvenido a tu casa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -37,12 +59,18 @@ public class CasaView extends JFrame implements InterfazVista {
 		agregarHabitacion.setActionCommand(AGREGAR);
 		removerHabitacion = new JButton("Remover");
 		removerHabitacion.setActionCommand(REMOVER);
+		prueba = new JButton("Nueva ventana");
+		prueba.setActionCommand(NUEVAVENTANA);
 		JPanel botonera = new JPanel();
-		botonera.add(agregarHabitacion); botonera.add(removerHabitacion);
+		botonera.add(agregarHabitacion); botonera.add(removerHabitacion); botonera.add(prueba);
 		panelPrincipal.add(botonera, BorderLayout.CENTER);
 		getContentPane().add(panelPrincipal);
 		
-		listaHabitaciones = new JList<>();
+		/*listaHabitaciones = new JList<>();
+		listaHabitaciones.setPreferredSize(new Dimension(400, 200));
+		JScrollPane sp = new JScrollPane(listaHabitaciones);
+		panelPrincipal.add(listaHabitaciones, BorderLayout.SOUTH);*/
+		
 	}
 	
 	
@@ -53,14 +81,16 @@ public class CasaView extends JFrame implements InterfazVista {
 	public void setController(CasaController c) {
 		agregarHabitacion.addActionListener(c);
 		removerHabitacion.addActionListener(c);
+		prueba.addActionListener(c);
 	}
-	
-	public void actualizarLista(DefaultListModel lista) {
-		this.listaHabitaciones.setModel(lista);
-		System.out.println("a");
-		panelPrincipal.revalidate();
-		panelPrincipal.repaint();
-		System.out.println("b");
+
+	public void setLista(JPanel panel) {
+		System.out.println("Tamaño: " + panel.getComponentCount());
+		panelPrincipal.remove(panelBotones);
+		
+		this.panelBotones = panel;
+		panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
+		this.pack();
 	}
 		
 	public void mostrar() {
@@ -68,4 +98,19 @@ public class CasaView extends JFrame implements InterfazVista {
 		this.setLocationRelativeTo(null);
 		setVisible(true);
 	}
+
+
+	@Override
+	public void actualizar() {		
+		SwingUtilities.updateComponentTreeUI(panelPrincipal);
+	}
+	
+	public void warning(String message) {
+		JOptionPane.showMessageDialog(this,
+			    message,
+			    "WARNING",
+			    JOptionPane.WARNING_MESSAGE);
+	}
+	
+	
 }

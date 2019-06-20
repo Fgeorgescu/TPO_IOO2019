@@ -7,11 +7,10 @@ import view.CasaView;
 public class Main {
 
 	public static void main(String []args ) {
-		System.out.println("Iniciamos el proyecto");
 		
 		Casa modeloCasa = new Casa();
 		
-		CasaView vista = new CasaView();
+		CasaView vista = CasaView.getInstance();
 		
 		CasaController control = new CasaController(modeloCasa, vista);
 		

@@ -3,6 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Utils;
+
 public class Habitacion {
 	
 	String nombre;
@@ -34,9 +36,9 @@ public class Habitacion {
 	 * @param nombreDeLuz Nombre de la nueva luz
 	 */
 	public void agregarLuz(String nombreDeLuz) {
-		/*if (Strings.isNullOrEmpty(nombreDeLuz)) {
+		if (Utils.isStringNullOrEmpty(nombreDeLuz)) {
 			throw new RuntimeException("Ingrese un nombre válido para la luz");
-		}*/ 
+		}
 		
 		for(Luz luz : luces) { //Recorre todo el array "luces" y hace lo que tengo en el body con c/elemento
 			if(luz.getNombre().equalsIgnoreCase(nombreDeLuz)) {
@@ -50,9 +52,9 @@ public class Habitacion {
 	
 	
 	public void removerLuz(String nombreDeLuz) {
-		/*if (Strings.isNullOrEmpty(nombreDeLuz)) {
-		throw new RuntimeException("Ingrese un nombre válido para la luz");
-		}*/ 
+		if (Utils.isStringNullOrEmpty(nombreDeLuz)) {
+			throw new RuntimeException("Ingrese un nombre válido para la luz");
+		}
 		
 		for(Luz luz : luces) { //Recorre todo el array "luces" y hace lo que tengo en el body con c/elemento
 			if(luz.getNombre().equalsIgnoreCase(nombreDeLuz)) {

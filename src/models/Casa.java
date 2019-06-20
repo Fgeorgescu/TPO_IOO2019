@@ -3,6 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Utils;
+
 public class Casa {
 
 	private String propietario;
@@ -24,16 +26,15 @@ public class Casa {
 		return this.habitaciones;
 	}
 	
-	public void agregarHabitación(String nombreDeHabitacion) {
-		/*if (Strings.isNullOrEmpty(nombreDeLuz)) {
-			throw new RuntimeException("Ingrese un nombre válido para la luz");
-		}*/ 
+	public void agregarHabitación(String nombreDeHabitacion) throws RuntimeException {
+		if (Utils.isStringNullOrEmpty(nombreDeHabitacion)) {
+			throw new RuntimeException("El nombre de la habitacion no puede ser vacío");
+		}
 	
 		for(Habitacion habitacion : habitaciones) { //Recorre todo el array "luces" y hace lo que tengo en el body con c/elemento
 			System.out.println("nombre habitacion: "+ habitacion.getNombre());
 			if(habitacion.getNombre().equalsIgnoreCase(nombreDeHabitacion)) {
-				//throw new RuntimeException("Ya existe la luz "+ nombreDeLuz);
-				return; //Cuando sume el throw no es necesario este step. Por ahora lo sumo para que no joda
+				throw new RuntimeException("Ya existe la habitacion: "+ habitacion.getNombre());
 			}
 		}
 		
@@ -41,17 +42,18 @@ public class Casa {
 	}
 	
 	public void removerHabitacion(String nombreDeHabitacion) {
-		/*if (Strings.isNullOrEmpty(nombreDeLuz)) {
-		throw new RuntimeException("Ingrese un nombre válido para la luz");
-		}*/ 
+		if (Utils.isStringNullOrEmpty(nombreDeHabitacion)) {
+			throw new RuntimeException("El nombre de la habitacion no puede ser vacío");
+		}
 		
-		for(Habitacion habitacion : habitaciones) { //Recorre todo el array "habitaciones" y hace lo que tengo en el body con c/elemento
-			if(habitacion.getNombre().equalsIgnoreCase(nombreDeHabitacion)) {
-				habitaciones.remove(habitacion); //Remuebo la luz. Validar si comprime el array para mantener el size correcto
+		int i = 0;
+		for(i = 0; i < habitaciones.size(); i++) { //Recorre todo el array "habitaciones" y hace lo que tengo en el body con c/elemento
+			if(habitaciones.get(i).getNombre().equalsIgnoreCase(nombreDeHabitacion)) {
+				habitaciones.remove(habitaciones.get(i)); //Remuebo la luz. Validar si comprime el array para mantener el size correcto
+				return;
 			}
 		}
-		//throw new RuntimeException("No se encuentra la lampara "+ nombreDeLuz);
-		return;
+		throw new RuntimeException("No se encuentra la habitacion: "+ nombreDeHabitacion);
 	}
 	
 	public List<String> getNombreHabitaciones() {
@@ -60,5 +62,14 @@ public class Casa {
 			nombres.add(hab.getNombre());
 		}
 		return nombres;
+	}
+	
+	public Habitacion getHabitacion(String nombre) {
+		for (Habitacion hab : this.habitaciones) {
+			if (hab.getNombre().equalsIgnoreCase(nombre)) {
+				return hab;
+			}
+		}
+		return null;
 	}
 }
