@@ -50,7 +50,8 @@ public class CasaController implements ActionListener {
 			
 			Habitacion habitacion = modelCasa.getHabitacion(boton.getText());
 			HabitacionVista habVista = HabitacionVista.getInstance();
-			new HabitacionController(habitacion, habVista);
+			HabitacionController controller = new HabitacionController(habitacion, habVista);
+			habVista.setControllers(controller);
 			habVista.setTitulo("Bienvenido a " + boton.getText());
 			
 			habVista.mostrar();
@@ -60,29 +61,5 @@ public class CasaController implements ActionListener {
 		} catch (RuntimeException e) {
 			casaView.warning(e.getMessage());
 		}
-	}
-	
-	public JPanel convertirListaHabitacionesABotones(List<Habitacion> habitaciones) {
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(habitaciones.size(),1));
-		for (i=0; i < habitaciones.size(); i++) {
-			Habitacion hab = modelCasa.getHabitaciones().get(i);
-			JButton button = new JButton(hab.getNombre());
-			button.addActionListener(this);
-			button.setActionCommand(casaView.NUEVAVENTANA);
-			panel.add(button);
-		}
-		return panel;
-	}
-	
-	/*public void updateLista() {
-		List<String> listaDeHabitaciones = this.modelCasa.getNombreHabitaciones();
-		DefaultListModel model = new DefaultListModel();
-		
-		for (String nombre : listaDeHabitaciones) {
-			model.addElement(nombre);
-		}
-		
-		this.casaView.setLista(model);
-	}*/ 
+	} 
 }

@@ -23,6 +23,16 @@ public class Habitacion {
 		this.nombre=nombre;
 	}
 	
+	public Luz getLuz(String name) {
+		int i = 0;
+		for( i=0 ; i < this.luces.size(); i++) {
+			if(this.luces.get(i).getNombre().equalsIgnoreCase(name)) {
+				return luces.get(i);
+			}
+		}
+		throw new RuntimeException("No encontramos la lampara " + name);
+	}
+	
 	public List<Luz> getLuces() {
 		return this.luces;
 	}
@@ -42,12 +52,12 @@ public class Habitacion {
 		
 		for(Luz luz : luces) { //Recorre todo el array "luces" y hace lo que tengo en el body con c/elemento
 			if(luz.getNombre().equalsIgnoreCase(nombreDeLuz)) {
-				//throw new RuntimeException("Ya existe la luz "+ nombreDeLuz);
-				return; //Cuando sume el throw no es necesario este step. Por ahora lo sumo para que no joda
+				throw new RuntimeException("Ya existe la luz "+ nombreDeLuz);
 			}
 		}
-		String id = this.nombre + "_luz_" + String.valueOf(luces.size()); //Genero el ID con el formato deseado
-		luces.add(new Luz(nombre, id)); // Creo y sumo la luz al array en el mismo paso.
+		System.out.println("Agregamos la luz" + nombreDeLuz);
+		String id = nombreDeLuz; //Genero el ID con el formato deseado
+		luces.add(new Luz(nombreDeLuz, id)); // Creo y sumo la luz al array en el mismo paso.
 	}
 	
 	
@@ -55,14 +65,14 @@ public class Habitacion {
 		if (Utils.isStringNullOrEmpty(nombreDeLuz)) {
 			throw new RuntimeException("Ingrese un nombre válido para la luz");
 		}
-		
-		for(Luz luz : luces) { //Recorre todo el array "luces" y hace lo que tengo en el body con c/elemento
-			if(luz.getNombre().equalsIgnoreCase(nombreDeLuz)) {
-				luces.remove(luz); //Remuebo la luz. Validar si comprime el array para mantener el size correcto
+		int i;
+		for(i = 0; i < luces.size(); i++) { //Recorre todo el array "luces" y hace lo que tengo en el body con c/elemento
+			if(luces.get(i).getNombre().equalsIgnoreCase(nombreDeLuz)) {
+				luces.remove(luces.get(i)); //Remuevo la luz. Validar si comprime el array para mantener el size correcto
+				return;
 			}
 		}
-		//throw new RuntimeException("No se encuentra la lampara "+ nombreDeLuz);
-		return;
+		throw new RuntimeException("No se encuentra la lampara "+ nombreDeLuz);
 	}
 	
 	

@@ -1,38 +1,32 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 
 import controller.CasaController;
 import models.Habitacion;
 
 public class CasaView extends JFrame implements InterfazVista {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
+	//Estructura del SINGLETON
 	private static final CasaView instance = new CasaView();
 	
 	public static CasaView getInstance(){
         return instance;
     }
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	JTextField nuevaHabitacion;
 	JButton agregarHabitacion;
@@ -60,10 +54,9 @@ public class CasaView extends JFrame implements InterfazVista {
 		agregarHabitacion.setActionCommand(AGREGAR);
 		removerHabitacion = new JButton("Remover");
 		removerHabitacion.setActionCommand(REMOVER);
-		prueba = new JButton("Nueva ventana");
-		prueba.setActionCommand(NUEVAVENTANA);
+	
 		JPanel botonera = new JPanel();
-		botonera.add(agregarHabitacion); botonera.add(removerHabitacion); botonera.add(prueba);
+		botonera.add(agregarHabitacion); botonera.add(removerHabitacion);
 		panelPrincipal.add(botonera, BorderLayout.CENTER);
 		getContentPane().add(panelPrincipal);
 		
@@ -82,7 +75,6 @@ public class CasaView extends JFrame implements InterfazVista {
 	public void setController(CasaController c) {
 		agregarHabitacion.addActionListener(c);
 		removerHabitacion.addActionListener(c);
-		prueba.addActionListener(c);
 	}
 		
 	public void mostrar() {
