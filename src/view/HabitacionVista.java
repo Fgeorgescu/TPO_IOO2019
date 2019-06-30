@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.List;
 
-import javax.rmi.CORBA.Util;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,20 +12,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 
 import controller.HabitacionController;
-import controller.LuzController;
-import utils.Utils;
-import models.Habitacion;
 import models.Luz;
+import utils.Utils;
 
-public class HabitacionVista extends JFrame implements InterfazVista {
+public class HabitacionVista extends GenericView {
 	
 	/**
 	 * 
@@ -89,13 +83,6 @@ public class HabitacionVista extends JFrame implements InterfazVista {
 		this.getContentPane().add(panelPrincipal);
 	}
 
-	@Override
-	public void mostrar() {
-		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-	}
-
 	public void mostrarLuces(List<Luz> luces, HabitacionController controller) {
 		int i;
 		JPanel panel = new JPanel();
@@ -129,11 +116,6 @@ public class HabitacionVista extends JFrame implements InterfazVista {
 		this.pack();
 	}
 	
-	@Override
-	public void actualizar() {		
-		SwingUtilities.updateComponentTreeUI(panelPrincipal);
-	}
-	
 	public void setTitulo(String titulo) {
 		this.setTitle(titulo);
 	}
@@ -155,12 +137,5 @@ public class HabitacionVista extends JFrame implements InterfazVista {
 		String response = this.inputNuevaLuz.getText();
 		this.inputNuevaLuz.setText("");
 		return response;
-	}
-	
-	public void warning(String message) {
-		JOptionPane.showMessageDialog(this,
-			    message,
-			    "WARNING",
-			    JOptionPane.WARNING_MESSAGE);
 	}
 }

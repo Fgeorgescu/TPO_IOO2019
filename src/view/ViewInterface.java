@@ -1,9 +1,10 @@
 package view;
 
-public interface InterfazVista {
+public interface ViewInterface {
 
 	public void mostrar();
 	public void actualizar();
+	public void warning(String mensaje);
 	
 	static final String AGREGAR = "Agregar elemento";
 	static final String REMOVER = "remover elemento";

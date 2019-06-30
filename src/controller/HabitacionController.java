@@ -12,7 +12,7 @@ import javax.swing.event.ChangeListener;
 import models.Habitacion;
 import models.Luz;
 import view.HabitacionVista;
-import view.InterfazVista;
+import view.ViewInterface;
 
 public class HabitacionController implements ActionListener, ChangeListener {
 
@@ -28,12 +28,12 @@ public class HabitacionController implements ActionListener, ChangeListener {
 		
 		String nombre = vista.obtenerNombre();
 		try {
-			if (evento.getActionCommand().equals(vista.AGREGAR)) {
+			if (evento.getActionCommand().equals(ViewInterface.AGREGAR)) {
 				model.agregarLuz(nombre);
 				vista.mostrarLuces(model.getLuces(), this);
 				
 				vista.actualizar();
-			} else if (evento.getActionCommand().equals(vista.REMOVER)) {
+			} else if (evento.getActionCommand().equals(ViewInterface.REMOVER)) {
 				model.removerLuz(nombre);
 				vista.mostrarLuces(model.getLuces(), this);
 				

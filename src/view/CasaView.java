@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 import controller.CasaController;
 import models.Habitacion;
 
-public class CasaView extends JFrame implements InterfazVista {
+public class CasaView extends GenericView {
 	/**
 	 * 
 	 */
@@ -35,7 +35,6 @@ public class CasaView extends JFrame implements InterfazVista {
 	JPanel panelBotones = new JPanel();
 
 	JList<JButton> listaHabitaciones;
-	JPanel panelPrincipal = new JPanel();
 
 	
 	private CasaView() {
@@ -75,26 +74,7 @@ public class CasaView extends JFrame implements InterfazVista {
 	public void setController(CasaController c) {
 		agregarHabitacion.addActionListener(c);
 		removerHabitacion.addActionListener(c);
-	}
-		
-	public void mostrar() {
-		this.pack();
-		this.setLocationRelativeTo(null);
-		setVisible(true);
-	}
-
-
-	@Override
-	public void actualizar() {		
-		SwingUtilities.updateComponentTreeUI(panelPrincipal);
-	}
-	
-	public void warning(String message) {
-		JOptionPane.showMessageDialog(this,
-			    message,
-			    "WARNING",
-			    JOptionPane.WARNING_MESSAGE);
-	}
+	}	
 	
 	public void mostrarListaDeHabitaciones(List<Habitacion> habitaciones, CasaController controller) {
 		int i;

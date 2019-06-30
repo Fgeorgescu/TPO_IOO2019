@@ -15,13 +15,12 @@ import models.Casa;
 import models.Habitacion;
 import view.CasaView;
 import view.HabitacionVista;
+import view.ViewInterface;
 
-@SuppressWarnings({ "rawtypes", "unchecked", "static-access"})
 public class CasaController implements ActionListener {
 	
 	private Casa modelCasa;
 	private CasaView casaView;
-	private int i;
 	
 	public CasaController(Casa modelCasa, CasaView casaView) {
 		this.modelCasa = modelCasa;
@@ -32,20 +31,20 @@ public class CasaController implements ActionListener {
 		
 		String nombre = casaView.obtenerNombre();
 		try {
-		if (evento.getActionCommand().equals(casaView.AGREGAR)) {
-			System.out.println(casaView.AGREGAR);
+		if (evento.getActionCommand().equals(ViewInterface.AGREGAR)) {
+			System.out.println(ViewInterface.AGREGAR);
 			modelCasa.agregarHabitación(nombre);
 			casaView.mostrarListaDeHabitaciones(modelCasa.getHabitaciones(), this);
 			
 			casaView.actualizar();
-		} else if (evento.getActionCommand().equals(casaView.REMOVER)) {
-			System.out.println(casaView.REMOVER);
+		} else if (evento.getActionCommand().equals(ViewInterface.REMOVER)) {
+			System.out.println(ViewInterface.REMOVER);
 
 			modelCasa.removerHabitacion(nombre);
 			casaView.mostrarListaDeHabitaciones(modelCasa.getHabitaciones(), this);
 			
 			casaView.actualizar();
-		} else if (evento.getActionCommand().equals(casaView.NUEVAVENTANA)) {
+		} else if (evento.getActionCommand().equals(ViewInterface.NUEVAVENTANA)) {
 			JButton boton = (JButton) evento.getSource();
 			
 			Habitacion habitacion = modelCasa.getHabitacion(boton.getText());
