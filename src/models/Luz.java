@@ -2,9 +2,9 @@ package models;
 
 public class Luz {
 	
-	String nombre;
-	String id;
-	boolean prendida;
+	private String nombre;
+	private String id;
+	private boolean prendida;
 	
 	public Luz(String nombre, String id) {
 		this.nombre = nombre;
