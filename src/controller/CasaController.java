@@ -33,7 +33,7 @@ public class CasaController implements ActionListener {
 		try {
 		if (evento.getActionCommand().equals(ViewInterface.AGREGAR)) {
 			System.out.println(ViewInterface.AGREGAR);
-			modelCasa.agregarHabitación(nombre);
+			modelCasa.agregarHabitacion(nombre);
 			casaView.mostrarListaDeHabitaciones(modelCasa.getHabitaciones(), this);
 			
 			casaView.actualizar();
