@@ -7,8 +7,8 @@ import utils.Utils;
 
 public class Habitacion {
 	
-	String nombre;
-	List<Luz> luces;
+	private String nombre;
+	private List<Luz> luces;
 	
 	public Habitacion(String nombre) {
 		this.nombre = nombre;
